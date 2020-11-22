@@ -38,7 +38,9 @@ class Fila:
     def pop(self):  # remove o elemento do topo da pilha
         if self._size > 0:
             elemento = self.primeiro.data
-            self.primeiro = self.primeiro.next
+            self.primeiro = self.primeiro.data
+            if self.primeiro is None:
+                self.ultimo = None
             self._size = self._size - 1
             return elemento
         raise IndexError("A fila está vazia")
