@@ -118,6 +118,24 @@ if __name__ == "__main__":
         else:
             print(r.root.data, 'encontrado')
 
+    random.seed(40)
+
+
+    def random_tree(_size=42):
+        element = random.sample(range(1, 1000), 42)
+        tree = BinarySearchTree()
+        for x in element:
+            tree.insert(x)
+        return tree
+
+
+    def example_tree():
+        element = [61, 89, 66, 43, 51, 16, 55, 11, 79, 77, 82, 32]
+        tree = BinarySearchTree()
+        for x in element:
+            tree.insert(x)
+        return tree
+
 """ if __name__ == "__main__":
     tree = BinaryTree()
     n1 = Node('a')
