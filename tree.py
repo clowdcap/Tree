@@ -15,6 +15,7 @@ class BinaryTree:
             self.root = node
         else:
             self.root = None
+    # Root simboliza raiz da árvore
 
     # Percurso em ordem simetrica ( Travessia_simétrica() )
     def simetric_traversal(self, node=None):
@@ -49,6 +50,18 @@ class BinaryTree:
         if hright > hleft:
             return hright + 1
         return hleft + 1
+
+class BinarySearchTree(BinaryTree):
+    def insert(self, elemento):
+        parent = None
+        x = self.root
+        while x:
+            parent = x
+            if elemento < x.data:
+                x = x.left
+            else:
+                x = x.right
+        return parent
 
 
 def postorder_exemple_tree():
