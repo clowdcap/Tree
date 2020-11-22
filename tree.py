@@ -1,5 +1,7 @@
 import random
 
+ROOT = 'root'
+
 
 class Node:
     def __init__(self, data):
@@ -9,6 +11,59 @@ class Node:
 
     def __str__(self):
         return str(self.data)
+
+
+class Fila:
+    def __init__(self):
+        self.primeiro = None
+        self.ultimo = None
+        self._size = 0
+
+    # Complexidade O[1]
+    def push(self, elemento):  # Insere um elemento na pilha
+        node = Node(elemento)
+        if self.ultimo is None:
+            self.ultimo = node
+        else:
+            self.ultimo.next = node
+            self.ultimo = node
+
+        if self.primeiro is None:
+            self.primeiro = node
+
+        self._size = self._size + 1
+
+    # Complexidade O[1]
+    def pop(self):  # remove o elemento do topo da pilha
+        if self._size > 0:
+            elemento = self.primeiro.data
+            self.primeiro = self.primeiro.next
+            self._size = self._size - 1
+            return elemento
+        raise IndexError("A fila está vazia")
+
+    # Complexidade O[1]
+    def peek(self):  # retorna o topo sem remover (Observar)
+        if self._size > 0:
+            elemento = self.primeiro.data
+            return elemento
+        raise IndexError("A fila está vazia")
+
+    def __len__(self):  # Retorna o tamanho da lista
+        return self._size
+
+    def __repr__(self):
+        if self._size > 0:
+            r = ""
+            ponteiro = self.primeiro
+            while ponteiro:
+                r = r + str(ponteiro.data) + " "
+                ponteiro = ponteiro.next
+            return r
+        return "A fila está vazia"
+
+    def __str__(self):
+        return self.__repr__()
 
 
 class BinaryTree:
@@ -66,6 +121,20 @@ class BinaryTree:
         if node.right:
             self.inorder_traversal(node.right)
 
+    def levelorder_traversal(self, node=ROOT):
+        if node == ROOT:
+            node = self.root
+
+        fila = Fila()
+        fila.push(node)
+        while len(fila):
+            node = fila.pop()
+            if node.left:
+                fila.push(node.left)
+            if node.right:
+                fila.push(node.right)
+            print(node, end=' ')
+
 
 class BinarySearchTree(BinaryTree):
     def insert(self, elemento):
@@ -100,23 +169,42 @@ class BinarySearchTree(BinaryTree):
 
 
 if __name__ == "__main__":
+
     random.seed(40)
 
-    elemento = random.sample(range(1, 1000), 38)
 
-    bst = BinarySearchTree()
-    for v in elemento:
-        bst.insert(v)
+    def random_tree(size=42):
+        elemento = random.sample(range(1, 1000), 42)
+        tree = BinarySearchTree()
+        for v in elemento:
+            tree.insert(v)
+        return tree
 
+
+    def example_tree():
+        elemento = [61, 89, 66, 43, 51, 16, 55, 11, 79, 77, 82, 33]
+        tree = BinarySearchTree()
+        for v in elemento:
+            tree.insert(v)
+        return tree
+
+
+    bst = example_tree()
     bst.inorder_traversal()
 
-    items = [30, 33, 55, 61, 117]
-    for item in items:
-        r = bst.search(item)
-        if r is None:
-            print(item, 'não encontrado')
-        else:
-            print(r.root.data, 'encontrado')
+    print('\n-----')
+    bst.levelorder_traversal()
+
+# SISTEMA DE BUSCA
+# print('\n-----')
+# items = [30, 33, 55, 61, 117]
+# for item in items:
+#    tree = BinarySearchTree()
+#    r = tree.search(item)
+#    if r is None:
+#        print('Elemento', item, 'não encontrado')
+#    else:
+#        print('Elemento', r.root.data, 'foi encontrado')
 
 """ if __name__ == "__main__":
     tree = BinaryTree()
@@ -193,4 +281,24 @@ def postorder_exemple_tree():
     n8.right = n7
 
     tree.root = n0
-    return tree'''
+    return tree
+
+
+    if __name__ == "__main__":
+    random.seed(40)
+
+    elemento = random.sample(range(1, 1000), 38)
+
+    bst = BinarySearchTree()
+    for v in elemento:
+        bst.insert(v)
+
+    bst.inorder_traversal()
+
+    items = [30, 33, 55, 61, 117]
+    for item in items:
+        r = bst.search(item)
+        if r is None:
+            print('Elemento', item, 'não encontrado')
+        else:
+            print('Elemento', r.root.data, 'foi encontrado')'''
