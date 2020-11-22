@@ -174,7 +174,7 @@ if __name__ == "__main__":
     random.seed(40)
 
 
-    def random_tree(size=42):
+    def random_tree(_size=42):
         elemento = random.sample(range(1, 1000), 42)
         tree = BinarySearchTree()
         for v in elemento:
