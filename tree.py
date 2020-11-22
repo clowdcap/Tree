@@ -1,6 +1,6 @@
 import random
 
-ROOT = 'root'
+ROOT = "root"
 
 
 class Node:
@@ -34,6 +34,7 @@ class Fila:
         self._size = self._size + 1
 
     # Complexidade O[1]
+    @property
     def pop(self):  # remove o elemento do topo da pilha
         if self._size > 0:
             elemento = self.primeiro.data
@@ -133,7 +134,7 @@ class BinaryTree:
                 fila.push(node.left)
             if node.right:
                 fila.push(node.right)
-            print(node, end=' ')
+            print(node, end=" ")
 
 
 class BinarySearchTree(BinaryTree):
@@ -182,7 +183,7 @@ if __name__ == "__main__":
 
 
     def example_tree():
-        elemento = [61, 89, 66, 43, 51, 16, 55, 11, 79, 77, 82, 33]
+        elemento = [61, 89, 66, 43, 51, 16, 55, 11, 79, 77, 82, 32]
         tree = BinarySearchTree()
         for v in elemento:
             tree.insert(v)
@@ -191,7 +192,6 @@ if __name__ == "__main__":
 
     bst = example_tree()
     bst.inorder_traversal()
-
     print('\n-----')
     bst.levelorder_traversal()
 
